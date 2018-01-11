@@ -17,12 +17,14 @@
             <div class="z-depth-1 card-panel green white-text" style="max-width:800px;margin: 3rem auto auto;">
                 {{ session()->get('success') }}
             </div>
+            <br/>
         @endif
 
         @if(session()->has('error'))
             <div class="z-depth-1 card-panel red white-text" style="max-width:800px;margin: 3rem auto auto;">
                 {{ session()->get('error') }}
             </div>
+            <br/>
         @endif
 
         @if($user != null)
@@ -136,7 +138,7 @@
                         <p><b>สิ่งที่สนใจ: </b>{{ implode(', ', $user->interests) }}</p>
                     </div>
                     <div class="row">
-                        <div class="col s12">
+                        <div class="col s12" style="margin-bottom: 8px;">
                             @if(!$user->receivedCert)
                                 <a href="{{ url('/admin/giveCert/' . $userId) }}" class="btn waves-effect green fullWidth">ยืนยันการให้เกียรติบัตร</a>
                             @else
