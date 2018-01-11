@@ -48,7 +48,21 @@ Route::group([ 'middleware' => ['auth']], function(){
         $user->save();
 
         session()->flash('success', 'สำเร็จ');
-        return redirect('/admin/check');
+        return redirect()->back();
+    });
+    Route::get('/admin/ungiveCert/{id}', function($id){
+        $user = \App\Account::where('id', '=', $id)->first();
+
+        if ($user == null){
+            session()->flash('error', 'ไม่พบผู้ใช้');
+            return redirect('/admin/check');
+        }
+
+        $user->receivedCert = false;
+        $user->save();
+
+        session()->flash('success', 'สำเร็จ');
+        return redirect()->back();
     });
 });
 Route::get('/api/token', 'AccountController@getAccessToken');

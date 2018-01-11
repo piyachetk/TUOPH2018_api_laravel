@@ -13,6 +13,18 @@
 <div class="container">
     <div class="section">
 
+        @if(session()->has('success'))
+            <div class="z-depth-1 card-panel green white-text" style="max-width:800px;margin: 3rem auto auto;">
+                {{ session()->get('success') }}
+            </div>
+        @endif
+
+        @if(session()->has('error'))
+            <div class="z-depth-1 card-panel red white-text" style="max-width:800px;margin: 3rem auto auto;">
+                {{ session()->get('error') }}
+            </div>
+        @endif
+
         @if($user != null)
 
             <h4>ข้อมูลบัญชีผู้ใช้ ({{ $user->id }})</h4>
@@ -123,18 +135,14 @@
                         <p><b>คะแนนแต้ม: </b>{{ $user->points }}</p>
                         <p><b>สิ่งที่สนใจ: </b>{{ implode(', ', $user->interests) }}</p>
                     </div>
-
                     <div class="row">
                         <div class="col s12">
                             @if(!$user->receivedCert)
-                                <a href="{{ url('/admin/giveCert/' . $userId) }}" class="btn waves-effect blue fullWidth">ยืนยันการให้เกียรติบัตร</a>
-                            @elseif(substr($user->ref_no, 0, 7) === "google:")
-                                <a class="btn waves-effect red fullWidth href">ได้รับใบเกียรติบัตรเรียบร้อยแล้ว</a>
+                                <a href="{{ url('/admin/giveCert/' . $userId) }}" class="btn waves-effect green fullWidth">ยืนยันการให้เกียรติบัตร</a>
+                            @else
+                                <a href="{{ url('/admin/ungiveCert/' . $userId) }}" class="btn waves-effect orange fullWidth">ยกเลิกการให้เกียรติบัตร</a>
                             @endif
                         </div>
-                    </div>
-
-                    <div class="row">
                         <div class="col s12">
                             @if(substr($user->ref_no, 0, 3) === "fb:")
                                 <a href="https://www.facebook.com/{{ substr($user->ref_no, 3) }}" class="btn waves-effect blue fullWidth">Facebook</a>
