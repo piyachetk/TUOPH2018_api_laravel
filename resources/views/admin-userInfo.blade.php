@@ -14,6 +14,7 @@
     <div class="section">
 
         @if($user != null)
+
             <h4>ข้อมูลบัญชีผู้ใช้ ({{ $user->id }})</h4>
             <br/>
             <div class="row">
@@ -121,6 +122,16 @@
                     <div class="z-depth-1 card-panel white" style="max-width:800px;">
                         <p><b>คะแนนแต้ม: </b>{{ $user->points }}</p>
                         <p><b>สิ่งที่สนใจ: </b>{{ implode(', ', $user->interests) }}</p>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s12">
+                            @if(!$user->receivedCert)
+                                <a href="{{ url('/admin/giveCert/' . $userId) }}" class="btn waves-effect blue fullWidth">ยืนยันการให้เกียรติบัตร</a>
+                            @elseif(substr($user->ref_no, 0, 7) === "google:")
+                                <a class="btn waves-effect red fullWidth href">ได้รับใบเกียรติบัตรเรียบร้อยแล้ว</a>
+                            @endif
+                        </div>
                     </div>
 
                     <div class="row">

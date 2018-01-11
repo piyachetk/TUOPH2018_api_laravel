@@ -36,6 +36,20 @@ Route::group([ 'middleware' => ['auth']], function(){
         session()->flush();
         return redirect('/');
     });
+    Route::get('/admin/giveCert/{id}', function($id){
+        $user = \App\Account::where('id', '=', $id)->first();
+
+        if ($user == null){
+            session()->flash('error', 'ไม่พบผู้ใช้');
+            return redirect('/admin/check');
+        }
+
+        $user->receivedCert = true;
+        $user->save();
+
+        session()->flash('success', 'สำเร็จ');
+        return redirect('/admin/check');
+    });
 });
 Route::get('/api/token', 'AccountController@getAccessToken');
 Route::get('/api/me', 'AccountController@me');

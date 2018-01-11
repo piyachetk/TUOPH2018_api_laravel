@@ -13,12 +13,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
 {
-    protected $fillable = ['id', 'prefix', 'firstName', 'lastName', 'picture', 'email', 'school', 'studentYear', 'type', 'points', 'scanned', 'registered', 'interests', 'ref_no'];
+    protected $fillable = ['id', 'prefix', 'firstName', 'lastName', 'picture', 'email', 'school', 'studentYear', 'type', 'points', 'scanned', 'registered', 'interests', 'receivedCert', 'ref_no'];
     protected $table = 'accounts';
 
     protected $casts = [
         'scanned' => 'array',
         'registered' => 'boolean',
+        'receivedCert' => 'boolean',
         'interests' => 'array'
     ];
 
