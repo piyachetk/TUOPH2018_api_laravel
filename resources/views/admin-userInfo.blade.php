@@ -138,13 +138,15 @@
                         <p><b>สิ่งที่สนใจ: </b>{{ implode(', ', $user->interests) }}</p>
                     </div>
                     <div class="row">
-                        <div class="col s12" style="margin-bottom: 8px;">
-                            @if(!$user->receivedCert)
-                                <a href="{{ url('/admin/giveCert/' . $userId) }}" class="btn waves-effect green fullWidth">ยืนยันการให้เกียรติบัตร</a>
-                            @else
-                                <a href="{{ url('/admin/ungiveCert/' . $userId) }}" class="btn waves-effect orange fullWidth">ยกเลิกการให้เกียรติบัตร</a>
-                            @endif
-                        </div>
+                        @if($user->registered)
+                            <div class="col s12" style="margin-bottom: 8px;">
+                                @if(!$user->receivedCert)
+                                    <a href="{{ url('/admin/giveCert/' . $userId) }}" class="btn waves-effect green fullWidth">ยืนยันการให้เกียรติบัตร</a>
+                                @else
+                                    <a href="{{ url('/admin/ungiveCert/' . $userId) }}" class="btn waves-effect orange fullWidth">ยกเลิกการให้เกียรติบัตร</a>
+                                @endif
+                            </div>
+                        @endif
                         <div class="col s12">
                             @if(substr($user->ref_no, 0, 3) === "fb:")
                                 <a href="https://www.facebook.com/{{ substr($user->ref_no, 3) }}" class="btn waves-effect blue fullWidth">Facebook</a>
