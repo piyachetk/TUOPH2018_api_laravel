@@ -159,7 +159,8 @@
             </div>
             <br/>
         @else
-                <h4>ไม่พบผู้ใช้</h4>
+                <br/>
+                <h4 class="center">ไม่พบผู้ใช้</h4>
                 <br/>
         @endif
 
